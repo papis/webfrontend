@@ -71,66 +71,10 @@
             <div class="papis-list">
                 <div class="card-panel">
                     <div class="child scrollable">
-                        <ul class="collection">
-                            <li class="collection-item">
-                                <span class="papis-title">Unmasking the abnormal events in video</span>
-                                <p class="papis-author">Radu Tudor Ionescu; Sorina Smeureanu; Bogdan Alexe; Marius Popescu</p>
-                            </li>
-                            <li class="collection-item collection-item-active">
-                                <span class="papis-title">Escape from Cells: Deep Kd-Networks for The Recognition of 3D Point Cloud Models</span>
-                                <p class="papis-author">Roman Klokov; Victor Lempitsky</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
-                            </li>
-                            <li class="collection-item ">
-                                <span class="papis-title">Measuring Sample Quality with Stein's Method</span>
-                                <p class="papis-author">Jackson Gorham; Lester Mackey</p>
+                        <ul class="collection paper-elements">
+                            <li class="collection-item" v-for="paper in papers">
+                                <span class="papis-title">{{ paper.title }}</span>
+                                <p class="papis-author">{{ paper.author }}</p>
                             </li>
                         </ul>
                     </div>
@@ -168,5 +112,30 @@
         <!-- Compiled and minified JavaScript -->
         <script src="js/jquery.min.js"></script>
         <script src="js/materialize.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+        <script type="text/javascript">
+
+        var papers_obj = new Vue({
+            el: '.paper-elements',
+
+            created: function () {
+                this.fetchData();
+            },
+
+            methods: {
+                fetchData: function () {
+                    var self = this;
+                    $.get( "http://localhost:8888/library/", function( data ) {
+                        self.papers = data;
+                    });
+                }
+            },
+            data:{
+                papers: []
+            }
+        })
+
+        </script>
     </body>
 </html>
