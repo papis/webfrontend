@@ -3,6 +3,7 @@
     <LeftMenu/>
     <PapersList/>
     <PaperDetail/>
+    <BottomRightButtons/>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import LeftMenu from './LeftMenu'
 import PapersList from './PapersList'
 import PaperDetail from './PaperDetail'
+import BottomRightButtons from './BottomRightButtons'
 
 
 export default {
@@ -18,7 +20,8 @@ export default {
   components: {
     LeftMenu,
     PapersList,
-    PaperDetail
+    PaperDetail,
+    BottomRightButtons
   }
 }
 </script>

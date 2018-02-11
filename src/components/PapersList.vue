@@ -4,9 +4,11 @@
       <div class="card-panel">
           <div class="child scrollable">
               <ul class="collection paper-elements">
-                 <li class="collection-item" v-for="paper in papers">
+                 <li
+                 v-bind:class="{'collection-item':true, 'collection-item-active':(paper === active_paper)}"
+                v-for="paper in papers" @click="selectPaper(paper)">
                      <span class="papis-title">{{ paper.title }}</span>
-                     <p class="papis-author">{{ paper.author }}</p>
+                     <p class="papis-authors">{{ paper.authors }}</p>
                  </li>
               </ul>
           </div>
@@ -14,24 +16,29 @@
   </div>
 </template>
 
+
 <script>
+
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'PapersList',
-  data() {
-      return {
-          papers: [],
-      }
+  computed: mapGetters({
+    papers: 'allPapers',
+    active_paper: 'activePaper',
+    show_list: 'showList',
+  }),
+
+  created () {
+    this.$store.dispatch('getAllPapers')
   },
-  created: function () {
-      this.fetchData();
-  },
+
   methods: {
-      fetchData: function () {
-          this.papers = [
-            {"title": "Principia Mathematica2", "author": "Newton", "id": 0},
-            {"title": "Principia Mathematica4", "author": "Newton", "id": 1}
-          ]
-      }
-  },
+    selectPaper(s) {
+      this.$store.dispatch('setActivePaper', s);
+    },
+
+  }
+
 }
 </script>
